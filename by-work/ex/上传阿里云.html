@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>上传图片</title>
+</head>
+
+<body>
+  <input type="file" name="picFieldName" id="picFieldId" onchange="uploadPic(this)" />
+</body>
+<script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-4.4.4.min.js"></script>
+<script>
+  var client = new OSS({
+    region: 'oss-cn-zhangjiakou.aliyuncs.com',
+	//云账号AccessKey有所有API访问权限，建议遵循阿里云安全最佳实践，创建并使用STS方式来进行API访问
+    accessKeyId: 'STS.NJPWTYk3jCqPRupFgmu8iVz8d',
+    accessKeySecret: 'Dbdya41sfNoemKx66h3vGqVibRuMBZYnJkvV5R8jBz83',
+    "Security Token": 'CAISgQN1q6Ft5B2yfSjIr4v+LdzGva9g47eYZl+E3TcRTbZVt/L7ozz2IH1JdXNoAegctfQzmGpW5vwYlq1xTptHHfYJs0Kaq8Y5yxioRqackXLcj9Vd+iXMewW6Dxr8w7U4CoedZdjBe/CrRknZnytou9XTfimjWFrXM//ujoV8PPAWRRWfZzhLD8tNRG5ls9RIGnbNEvyvPxX24BLXF1E6lgd4hH9yzq69z8aAiH/Zl0ao7u4Ou7z4OIS/DblrJ4wtet2yxvBTa67d0TZZ8QR37KNxhaAmnDDcpYOlHkV26ReLOPau2L8JFgJiYbUgEKNpteX1keYC2tbejIPq0R1AT683Ky3UX9Kn29CWWrHrZNQ8cbSZQX3GyYKILYKn8VFmM3AeMAENOfhZcyEgUUR9E2qEcf/9qA2RPT3OEfbVjPsEtrNu1Ejt8NawIFyCfq6Uyy5wOOVnMh55bUZOhTa6IvNaKVIcKQl9fqSVUIZ6bQlfr6zksA/PWzZt3qD5bhIajmW8GoABmLVi+NRFiLLsfZh1gFib1nobRbzLlQcnJMJVM5qZhfO+XKcBmiEPinLC2piNXKWjtb9wbhh3/fUjOYXIxhbvTT1UDrQlVl8UaYGAvFv2NEyAYwvqLgs1Wo2ZUChsz+oOdWaJT7FNrOGk/dykVXiXZMIqVBmJjw7E9SOC6HfoskU=',
+    bucket: 'jmlj'
+  });
+
+  function uploadPic(obj) {
+    var file = obj.files[0]; //获取文件流
+    var val = obj.value;
+    var suffix = val.substr(val.indexOf("."));
+    var storeAs = "studio_course/" + timestamp() + suffix;
+    console.log(file.name + ' => ' + storeAs);
+    client.multipartUpload(storeAs, file).then(function (result) {
+
+    }).catch(function (err) {
+      console.log(err);
+    });
+  }
+
+
+  /**
+   * 生成文件名
+   * @returns
+   */
+  function timestamp() {
+    var time = new Date();
+    var y = time.getFullYear();
+    var m = time.getMonth() + 1;
+    var d = time.getDate();
+    var h = time.getHours();
+    var mm = time.getMinutes();
+    var s = time.getSeconds();
+    console.log(y);
+    return "" + y + add0(m) + add0(d) + add0(h) + add0(mm) + add0(s);
+  }
+
+  function add0(m) {
+    return m < 10 ? '0' + m : m;
+  }
+</script>
+
+</html>

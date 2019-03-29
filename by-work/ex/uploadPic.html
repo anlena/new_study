@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<form action="/api/v1.0/tests/testfile" encType="multipart/form-data"  method="post">
+  <input type="file" id="file" />
+  <button type="submit">提交</button>
+</form>
+<body>
+  <script src="https://github.com/rockuw/oss-in-browser#ie-compatibility"></script>
+  <script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-4.4.4.min.js"></script>
+  <script type="text/javascript">
+    document.getElementById('file').addEventListener('change', function (e) {
+          let file = e.target.files[0];
+          let storeAs = 'upload-file';
+          console.log(file.name + ' => ' + storeAs);
+          let client1 = new OSS({
+            "Security Token": "CAISgQN1q6Ft5B2yfSjIr4iCH9XOi5oQ1bGvZBHfo20MZsgVhrH61zz2IH1JdXNoAegctfQzmGpW5vwYlq1xTptHHcow8yabq8Y5yxioRqackXLcj9Vd+iXMewW6Dxr8w7U4CoedZdjBe/CrRknZnytou9XTfimjWFrXM//ujoV8PPAWRRWfZzhLD8tNRG5ls9RIGnbNEvyvPxX24BLXF1E6lgd4hH9yzq69z8aAiH/Zl0ao7u4Ou7z4OIS/DblrJ4wtet2yxvBTa67d0TZZ8QR37KNxhaAmnDDcpYOlHkV26ReLOPau2L8JFgJiYbUgEKNpteX1keYC2tbejIPq0R1AT683Ky3UX9Kn29CWWrHrZNQ8cbSZQX3GyYKILYKn8VFmM3AeMAENOfhZcyEgUUR9E2qEcf/9qA2RPT3OEfbVjPsEtrNu1Ejt8NawIFyCfq6Uyy5wOOVnMh55bUZOhTa6IvNaKVIcKQl9fqSVUIZ6bQlfr6zksA/PWzZt3qD5bhIajmW8GoABawVnqmQfCTp1h1268eoaZtifn50dqZpoykmfLxsjt7Q+TRDE1WE+FQv4EFGJiAeH+s+2j1NPgbH9nufA/dcG6PvTfC7CDOXclo/0Cr0ASb8vrPJ11UIkg2We3Jy2EZG4O6DAFirP2Kj0sOKhfR6fT+1e5ErlHzCV5ZGqgkivqt4=",
+            "accessKeyId": "STS.NK7TozfE1bsDf7nGmYjG9itQ5",
+            "bucketName": "jmlj",
+            "accessKeySecret": "EhEgRxQ2HTDa48yt2eVNfcpmYwAxXEAGoTQjwnECQwo9",
+          });
+          //storeAs表示上传的object name , file表示上传的文件
+          client1.multipartUpload(storeAs, file).then(function (result) {
+            console.log(result);
+          }).catch(function (err) {
+            console.log(err);
+          });
+        })
+  </script>
+</body>
+
+</html>

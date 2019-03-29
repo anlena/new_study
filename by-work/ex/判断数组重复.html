@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    let arr1 = [{
+      "projectId": null,
+      "projectName": null,
+      "roomId": 206,
+      "roomNameId": 46,
+      "roomTitle": null,
+      "roomName": "test",
+      "devices": [{
+        "deviceId": 164,
+        "deviceName": " ",
+        "productTypeId": 1,
+        "categoryId": 1,
+        "categoryName": "照明",
+        "typeName": "大灯",
+        "visible2": false
+      }],
+      "visible3": false
+    }, {
+      "projectId": null,
+      "projectName": null,
+      "roomId": 261,
+      "roomNameId": 49,
+      "roomTitle": null,
+      "roomName": "test小客厅",
+      "devices": [{
+        "deviceId": 212,
+        "deviceName": "3",
+        "productTypeId": 1,
+        "categoryId": 1,
+        "categoryName": "照明",
+        "typeName": "大灯",
+        "visible2": false
+      }, {
+        "deviceId": 213,
+        "deviceName": "4",
+        "productTypeId": 1,
+        "categoryId": 1,
+        "categoryName": "照明",
+        "typeName": "大灯",
+        "visible2": false
+      }],
+      "visible3": false,
+      "message": false
+    }, {
+      "projectId": null,
+      "projectName": null,
+      "roomId": 204,
+      "roomNameId": 1,
+      "roomTitle": null,
+      "roomName": "客厅11",
+      "devices": [],
+      "visible3": false,
+      "message": false
+    }, {
+      "projectId": null,
+      "projectName": null,
+      "roomId": null,
+      "roomNameId": 5,
+      "roomTitle": null,
+      "roomName": "主卧",
+      "devices": [{
+        "deviceId": null,
+        "deviceName": "筒灯",
+        "productTypeId": 1,
+        "categoryId": 1,
+        "categoryName": "照明",
+        "typeName": "大灯"
+      }],
+      "message": false
+    }, {
+      "projectId": null,
+      "projectName": null,
+      "roomId": null,
+      "roomNameId": 6,
+      "roomTitle": null,
+      "roomName": "主厕所",
+      "devices": [{
+        "deviceId": null,
+        "deviceName": "3",
+        "productTypeId": 1,
+        "categoryId": 1,
+        "categoryName": "照明",
+        "typeName": "大灯"
+      }],
+      "message": false
+    }, {
+      "projectId": null,
+      "projectName": null,
+      "roomId": null,
+      "roomNameId": 1,
+      "roomTitle": null,
+      "roomName": "客厅11",
+      "devices": [{
+        "deviceId": null,
+        "deviceName": "灯",
+        "productTypeId": 3,
+        "categoryId": 2,
+        "categoryName": "窗帘",
+        "typeName": "自动窗帘"
+      }],
+      "message": false
+    }, {
+      "projectId": null,
+      "projectName": null,
+      "roomId": null,
+      "roomNameId": 21,
+      "roomTitle": null,
+      "roomName": "卧室",
+      "devices": [{
+        "deviceId": null,
+        "deviceName": "直筒灯",
+        "productTypeId": 3,
+        "categoryId": 2,
+        "categoryName": "窗帘",
+        "typeName": "自动窗帘"
+      }],
+      "message": false
+    }, {
+      "projectId": null,
+      "projectName": null,
+      "roomId": null,
+      "roomNameId": 38,
+      "roomTitle": null,
+      "roomName": "大客厅",
+      "devices": [{
+        "deviceId": null,
+        "deviceName": "55",
+        "productTypeId": 2,
+        "categoryId": 1,
+        "categoryName": "照明",
+        "typeName": "可调灯"
+      }],
+      "message": false
+    }];
+
+
+    var arr = [{
+      id: 1,
+      message: false
+    }, {
+      id: 2,
+      message: false
+    }, {
+      id: 3,
+      message: false
+    }, {
+      id: 1,
+      message: false
+    }];
+
+    // for (let i = 0; i < arr.length; i++) {
+    //   for (let j = i + 1; j < arr.length; j++) {
+    //     if (arr[i].id === arr[j].id) {
+    //       if(arr[i].message === false){
+    //         arr[i].message = true;
+    //       }
+    //       if(arr[j].message === false){
+    //         arr[j].message = true;
+    //       }
+    //     }else{
+    //       if(arr[i].message === true && arr[j].message === true){
+    //         arr[i].message = false;
+    //         arr[j].message = false;
+
+    //       }
+    //     }
+    //   }
+    // }
+
+    let newArr = [];
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = i + 1; j < arr.length; j++) {
+        if (arr[i].id === arr[j].id) {
+          // console.log(i,j);
+          newArr.push(i);
+        }
+      }
+    }
+
+    console.log(Array.from(new Set(newArr)));
+  </script>
+</body>
+
+</html>

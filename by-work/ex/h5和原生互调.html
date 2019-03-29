@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    function setupWebViewJavascriptBridge(callback) {
+      if (window.WebViewJavascriptBridge) {
+        return callback(WebViewJavascriptBridge);
+      }
+      if (window.WVJBCallbacks) {
+        return window.WVJBCallbacks.push(callback);
+      }
+      window.WVJBCallbacks = [callback];
+      var WVJBIframe = document.createElement('iframe');
+      WVJBIframe.style.display = 'none';
+      WVJBIframe.src = 'https://__bridge_loaded__';
+      document.documentElement.appendChild(WVJBIframe);
+      setTimeout(function () {
+        document.documentElement.removeChild(WVJBIframe)
+      }, 0)
+    }
+
+    setupWebViewJavascriptBridge(function (bridge) {
+      // ios调用js
+      bridge.registerHandler('ToJs', function (data, responseCallback) {
+        var responseData = {
+          'Javascript Says': '调用成功'
+        }
+        responseCallback(responseData)
+      })
+
+      // js调用ios
+      // 打开app
+      let iosOpen = function () {
+        bridge.callHandler('openApp', {
+          'foo': 'bar'
+        }, function (response) {
+
+        })
+      }
+
+      //关闭app
+      function iosClose() {
+        bridge.callHandler('closeApp', {
+          'bar': 'foo'
+        }, function (response) {
+
+        })
+      }
+      window.iosOpen = iosOpen;
+      window.iosClose = iosClose;
+    })
+    window.aaa = iosOpen;
+
+    function iosOpen() {
+      bridge.callHandler('openApp', {
+        'foo': 'bar'
+      }, function (response) {
+
+      })
+    }
+  </script>
+</body>
+
+</html>
